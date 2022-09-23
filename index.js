@@ -1,6 +1,5 @@
 const express = require("express");
 const app = express();
-
 const { Worker } = require("worker_threads");
 
 app.get("/uploadImage", async (req, res) => {
@@ -28,7 +27,7 @@ app.get("/uploadImage", async (req, res) => {
       });
     });
 
-    // console.log("worker thread completed. ", workerPromise);
+    console.log("worker thread completed. ", workerPromise);
 
     res.status(200).json({
       status: "done",
