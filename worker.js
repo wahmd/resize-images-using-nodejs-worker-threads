@@ -20,20 +20,13 @@ async function resizeImage() {
   }
 
   let updatedBuff;
-  updatedBuff = await new Promise((resolve, reject) => {
-    sharp("mytestimg.jpg")
-      .rotate()
-      .resize(width, height)
-      .toBuffer()
-      .then((data) => {
-        resolve(data);
-      })
-      .catch((err) => {
-        reject(err);
-      });
-  });
+  updatedBuff = await sharp("mytestimg.jpg")
+    .rotate()
+    .resize(20000, 20000)
+    .jpeg({ mozjpeg: true })
+    .toBuffer();
 
-  //   await fs.writeFile(`${company}-${category}.jpg`, updatedBuff);
+  await fs.writeFile(`${company}-${category}.jpg`, updatedBuff);
 
   parentPort.postMessage({ msg: "resized imaged wrote" });
 }
